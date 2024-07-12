@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - '*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release'
+        required: false
+        default: 'latest'
 
 jobs:
   build:
@@ -25,22 +31,22 @@ jobs:
           target: x86_64-pc-windows-msvc
           default: true
 
-      - name: Cache
-        id: cache
+      - name: Cache Node Modules
+        id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: node_modules
           key: buildCachev25
 
-      - name: Cache
-        id: cache2
+      - name: Cache Mod Manager Node Modules
+        id: cache-mod-manager-node-modules
         uses: actions/cache@v3
         with:
           path: Mod Manager/node_modules
           key: buildCache2v20
 
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: |
           npm install
 
@@ -68,7 +74,7 @@ jobs:
           pkg package.json --targets node18-win-x64 --output Deploy.exe --compress Brotli
 
       - name: Install GUI dependencies
-        if: steps.cache2.outputs.cache-hit != 'true'
+        if: steps.cache-mod-manager-node-modules.outputs.cache-hit != 'true'
         run: |
           cd "Mod Manager"
           npm install
@@ -133,15 +139,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Cache
-        id: cache
+      - name: Cache Node Modules
+        id: cache-node-modules-sentry
         uses: actions/cache@v3
         with:
           path: node_modules
           key: buildCachev23
 
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-node-modules-sentry.outputs.cache-hit != 'true'
         run: |
           npm install
 
