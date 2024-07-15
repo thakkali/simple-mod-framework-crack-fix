@@ -2,7 +2,7 @@
 
 A mod framework for HITMAN 3 (this fork supports the use of a cracked HITMAN 3 game) that allows the automatic synthesis of mods from source files.
 
-You can download an artifact (nightly) version of the framework from [here](https://nightly.link/EverythingSuckz/simple-mod-framework/workflows/artifact/main/Output.zip).
+You can download an artifact (nightly) version of the framework from [here](https://nightly.link/EverythingSuckz/simple-mod-framework-crack-fix/workflows/artifact/main/Output.zip).
 
 > [!WARNING]
 > This project is intended for educational purposes only. The use of pirated software is illegal and unethical. We strongly discourage the use of this framework with pirated copies of HITMAN 3 or any other software. 
