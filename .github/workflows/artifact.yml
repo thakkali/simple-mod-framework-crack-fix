@@ -9,11 +9,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -25,14 +25,14 @@ jobs:
 
       - name: Cache
         id: cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: buildCachev25
 
       - name: Cache
         id: cache2
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v4
         with:
           path: Mod Manager/node_modules
           key: buildCache2v20
@@ -87,8 +87,7 @@ jobs:
           New-Item -ItemType Directory "dist/Mod Manager"
           robocopy ./Third-Party ./dist/Third-Party /E; if ($lastexitcode -lt 8) { $global:LASTEXITCODE = $null }
           robocopy "./For Build" ./dist /E; if ($lastexitcode -lt 8) { $global:LASTEXITCODE = $null }
-          robocopy ./docs ./dist/Info /E; if ($lastexitcode -lt 8) { $global:LASTEXITCODE = $null }
-          robocopy ./compiled ./dist/API /E *.d.ts; if ($lastexitcode -lt 8) { $global:LASTEXITCODE = $null }
+          robocopy ./docs ./dist/Info /E; if ($lastexitcode -lt 8) { $global:LASTEXITCODE = $null }          robocopy ./compiled ./dist/API /E *.d.ts; if ($lastexitcode -lt 8) { $global:LASTEXITCODE = $null }
           robocopy ".\Mod Manager\dist\win-unpacked" "./dist/Mod Manager" /E; if ($lastexitcode -lt 8) { $global:LASTEXITCODE = $null }
           copy Deploy.exe dist
           New-Item -Path dist -Name "Mod Manager.cmd" -ItemType "file" -Value "@echo off`ncd `"Mod Manager`"`nstart `"`" `"Mod Manager.exe`""
@@ -99,7 +98,7 @@ jobs:
           filename: Release.zip
           directory: dist
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: Output
           path: dist/Release.zip
